@@ -1,101 +1,126 @@
-import Image from "next/image";
+'use client';
+import { useState } from 'react';
+import { Clock, Menu, Thermometer, X, Zap, ZapOff } from "react-feather";
+import Image from 'next/image';
+import CarCard from '@/components/CarCard';
+import { carData } from '@/data/carData';
+import CarCarousel from '@/components/CarCarousel';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [isNavVisible, setIsNavVisible] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const toggleNav = () => {
+    setIsNavVisible(!isNavVisible);
+  };
+
+  return (
+    <main className="relative h-screen sm:mx-32 p-6">
+      <header className="flex items-center justify-between">
+        <div className='flex items-center gap-1'>
+          <Image src={'/ri_steering-fill.png'} width={20} height={20} alt='steering-logo' className='flex-shrink-0' />
+          <h2 className='font-medium text-[16px]'>Elecar</h2>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+
+        {/* Menu button only visible on mobile */}
+        <Menu onClick={toggleNav} className="cursor-pointer md:hidden" />
+
+        {/* Nav list always visible on desktop, hidden on mobile */}
+        <nav className="hidden md:flex gap-10">
+          <ul className="flex items-center gap-10 text-[16px] font-medium">
+            <li>Home</li>
+            <li>About</li>
+            <li>Popular</li>
+            <li>Featured</li>
+          </ul>
+        </nav>
+      </header>
+
+      {/* Mobile navigation overlay */}
+      {isNavVisible && (
+        <nav className="absolute top-0 left-0 w-full h-full bg-white/30 backdrop-blur-md flex justify-center items-center">
+          <button onClick={toggleNav} className="absolute top-5 right-5 text-white">
+            <X size={24} />
+          </button>
+          <ul className="flex flex-col items-center gap-10 text-white text-lg font-semibold">
+            <li>Home</li>
+            <li>About</li>
+            <li>Popular</li>
+            <li>Featured</li>
+          </ul>
+        </nav>
+      )}
+
+      <section className='mt-[133px] flex flex-col items-center justify-center'>
+        <h1 className='font-semibold text-[23px]'>Choose The Best Car</h1>
+        <h3 className='mt-[26px] font-semibold text-[24px]'>Porsche Mission E</h3>
+        <div className='flex items-center mt-3 space-x-1'>
+          <Zap fill='#4177DC' strokeWidth={0} />
+          <p className='font-normal text-[13px]'>Electric Car</p>
+        </div>
+        <Image src={'/home 1.png'} width={280} height={164} alt='car' className='mt-20' />
+        <div className='flex mt-[40px] justify-center space-x-10 items-center w-fit'>
+          <div className='flex flex-col items-center'>
+            <div className='flex bg-slate-500 bg-opacity-50 rounded-full h-6 w-6 items-center justify-center'>
+              <Thermometer size={10} />
+            </div>
+            <p className='font-medium text-[20px] mt-2'>24°</p>
+            <p className='font-light uppercase text-[10px]'>Temperature</p>
+          </div>
+          <div className='flex flex-col items-center'>
+            <div className='flex bg-slate-500 bg-opacity-50 rounded-full h-6 w-6 items-center justify-center'>
+              <Clock size={10} />
+            </div>
+            <p className='font-medium text-[20px] mt-2'>873</p>
+            <p className='font-light uppercase text-[10px]'>Mileage</p>
+          </div>
+          <div className='flex flex-col items-center'>
+            <div className='flex bg-slate-500 bg-opacity-50 rounded-full h-6 w-6 items-center justify-center'>
+              <Zap size={10} />
+            </div>
+            <p className='font-medium text-[20px] mt-2'>94%</p>
+            <p className='font-light uppercase text-[10px]'>battery</p>
+          </div>
+        </div>
+        <div className='mt-12 mx-auto flex items-center'>
+          <div className='border border-green-600 rounded-full h-24 w-24 flex items-center justify-center'>
+            <div className='flex items-center justify-center border border-green-300 w-20 h-20 rounded-full'>
+              Start
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="mt-20 mb-8 md:flex sm:gap-20 sm:mx-auto md:max-w-6xl">
+        <div className="relative w-full h-auto">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src={'/about 1(1).png'}
+            alt="car-dashboard"
+            layout="responsive"
+            width={312}
+            height={210}
+            className="object-cover w-full h-auto"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+          <div className="absolute bottom-[-10px] right-0 bg-white/10 backdrop-blur-lg p-4 rounded-lg shadow-lg transform translate-y-1/4 flex flex-col items-center justify-center w-44 h-24">
+            <h3 className="font-semibold text-white">2,500+</h3>
+            <p className="text-white text-sm">Supercharges placed along popular routes</p>
+          </div>
+        </div>
+
+        <div className="mt-[50px]">
+          <h2 className="font-semibold text-lg">Machines With <br /> Future Technology</h2>
+          <p className="mt-5 font-light text-[15px]">
+            See the future with high-performance electric cars produced by renowned brands. They feature futuristic builds and designs with new and innovative platforms that last a long time.
+          </p>
+          <button className="mt-8 bg-[#4177DC] px-8 py-4 rounded-md">
+            Know more
+          </button>
+        </div>
+      </section>
+      <section className='mt-14 flex flex-col items-center'>
+          <h2 className='text-center w-3/4 font-semibold mb-16'>Choose Your Electric Car 
+          Of The Porsche Brand</h2>
+          
+          <CarCarousel className='w-full'/>
+      </section>
+    </main>
   );
 }
