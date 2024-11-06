@@ -115,7 +115,7 @@ export default function Home() {
           </button>
         </div>
       </section>
-      <section className='mt-14 flex flex-col items-center'>
+      <section className='flex flex-col items-center my-14'>
           <h2 className='text-center w-3/4 font-semibold mb-16'>Choose Your Electric Car 
           Of The Porsche Brand</h2>
           
