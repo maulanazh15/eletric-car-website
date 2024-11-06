@@ -1,9 +1,7 @@
 'use client';
 import { useState } from 'react';
-import { Clock, Menu, Thermometer, X, Zap, ZapOff } from "react-feather";
+import { Clock, Menu, Thermometer, X, Zap } from "react-feather";
 import Image from 'next/image';
-import CarCard from '@/components/CarCard';
-import { carData } from '@/data/carData';
 import CarCarousel from '@/components/CarCarousel';
 
 export default function Home() {
