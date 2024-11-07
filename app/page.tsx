@@ -215,18 +215,21 @@ export default function Home() {
           })}
         </div>
       </section>
-      <section className='relative mt-14 flex flex-col items-center pt-14 overflow-hidden gap-3 pb-10'>
-        <h2 className='font-semibold text-xl text-center w-3/4 mb-8'>
-          Do You Want To Receive Special Offers?
-        </h2>
-        <p className='text-center font-light text-base'>
-          Be the first to receive all the information about our products and new cars by email by subscribing to our mailing list.
-        </p>
-        <button className="mt-8 bg-[#4177DC] px-8 py-4 rounded-md">
-          Subscribe Now
-        </button>
+      <section className='relative mt-14 flex flex-col items-center pt-14 overflow-hidden gap-3 pb-10 lg:flex-row'>
+        <div className='flex flex-col lg:items-start items-center'>
+          <h2 className='font-semibold text-xl w-3/4 mb-8 text-center lg:text-left'>
+            Do You Want To Receive Special Offers?
+          </h2>
+          <p className='lg:text-left text-center font-light text-base'>
+            Be the first to receive all the information about our products and new cars by email by subscribing to our mailing list.
+          </p>
+          <button className="mt-8 bg-[#4177DC] px-8 py-4 rounded-md">
+            Subscribe Now
+          </button>
+        </div>
+
         <div className='mt-16'>
-          <div className='w-screen flex items-center justify-center'>
+          <div className='flex items-center justify-center'>
             <Image src={'/subscribe 1.png'} alt='car' width={500} height={500} />
 
           </div>
@@ -234,14 +237,14 @@ export default function Home() {
 
       </section>
       <section className='mt-14 flex items-center justify-center py-14'>
-        <div className='grid grid-cols-3 gap-11'>
+        <div className='grid grid-cols-3 lg:flex lg:flex-row lg:justify-between lg:items-center gap-11 lg:w-full'>
           {new Array(6).fill(null).map((_, index) => (
             <Image key={index} src={`/logo/logo${index + 1}.png`} alt={`logo ${index + 1}`} width={40} height={40} />
           ))}
         </div>
       </section>
-      <footer className='py-16 flex flex-col gap-10'>
-        <div className=''>
+      <footer className='py-16 flex flex-col gap-10 lg:space-x-10 lg:flex-row lg:justify-between lg:w-full'>
+        <div className='lg:w-[23%]'>
           <div className='flex items-center gap-1'>
             <Image src={'/ri_steering-fill.png'} width={25} height={25} alt='steering-logo' />
             <h2 className='font-medium text-xl'>Elecar</h2>
@@ -266,12 +269,12 @@ export default function Home() {
             <li>Services</li>
           </ul>
         </div>
-        <div className='w-1/3'>
+        <div className=''>
           <h3 className='font-semibold text-base mb-6'>Follow us</h3>
-          <div className='flex items-center justify-between'>
-              <Facebook/>
-              <Instagram/>
-              <Twitter/>
+          <div className='flex items-center gap-6'>
+            <Facebook />
+            <Instagram />
+            <Twitter />
           </div>
         </div>
       </footer>
