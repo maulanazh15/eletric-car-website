@@ -1,8 +1,8 @@
 interface Car {
     brand: string;
     model: string;      // Model of the car
-    time: number;       // Acceleration time (in seconds)
-    top_speed: number;  // Top speed (in km/h)
+    time: number | null;       // Acceleration time (in seconds)
+    top_speed: number | null;  // Top speed (in km/h)
     price: string;      // Price (in USD)
     imageSrc: string;   // Image source URL
 }
@@ -50,4 +50,47 @@ const carData: Car[] = [
     }
 ];
 
-export { carData };
+const carData1 : Car[] = [
+    {
+        brand: 'Tesla',
+        model: 'Model X',
+        price: '98,900',
+        imageSrc: '/images/featured1.png',
+        time: null,
+        top_speed: null
+    },
+    {
+        brand: 'Tesla',
+        model: 'Model 3',
+        price: '45,900',
+        imageSrc: '/images/featured2.png',
+        time: null,
+        top_speed: null
+    },
+    {
+        brand: 'Audi',
+        model: 'E-tron',
+        price: '175,900',
+        imageSrc: '/images/featured3.png',
+        time: null,
+        top_speed: null
+    },
+    {
+        brand: 'Porsche',
+        model: 'Boxster 987',
+        price: '126,900',
+        imageSrc: '/images/featured5.png',
+        time: null,
+        top_speed: null
+    },
+    {
+        brand: 'Porsche',
+        model: 'Panamera',
+        price: '126,900',
+        imageSrc: '/images/featured1.png',
+        time: null,
+        top_speed: null
+    },
+] 
+
+export { carData, carData1 };

@@ -6,8 +6,8 @@ import { ArrowUp, ShoppingCart } from 'react-feather';
 interface CarCardProps {
     brand: string;
     model: string;
-    time: number;
-    top_speed: number;
+    time: number | null;
+    top_speed: number | null;
     price: string;
     imageSrc: string; // Image source URL
 }
@@ -21,7 +21,7 @@ export default function CarCard({
     imageSrc
 }: CarCardProps) {
     return (
-        <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-6 w-[258px] h-[328px] shadow-lg flex flex-col justify-between text-white">
+        <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl p-6 w-[258px] h-full shadow-lg flex flex-col justify-between text-white">
             {/* Car Model and Image */}
             <div>
                 <h2 className="font-semibold text-xl">{brand}</h2>
@@ -31,23 +31,28 @@ export default function CarCard({
                 </div>
             </div>
 
-            {/* Specs */}
-            <div className="mx-auto text-sm w-full">
-                <div className="grid grid-cols-2 gap-y-2 gap-x-4 w-full">
-                    <div className="flex items-center gap-1">
-                        <Speed fontSize="small" />
-                        <span className="font-[13px]">{time} Sec</span>
+            {time !==null &&
+                <>
+                    {/* Specs */}
+                    <div className="mx-auto text-sm w-full">
+                        <div className="grid grid-cols-2 gap-y-2 gap-x-4 w-full">
+                            <div className="flex items-center gap-1">
+                                <Speed fontSize="small" />
+                                <span className="font-[13px]">{time} Sec</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <ArrowUp fontSize="small" />
+                                <span>{top_speed} Km/h</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <BatteryChargingFull fontSize="small" />
+                                <span>Electric</span>
+                            </div>
+                        </div>
                     </div>
-                    <div className="flex items-center gap-1">
-                        <ArrowUp fontSize="small" />
-                        <span>{top_speed} Km/h</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                        <BatteryChargingFull fontSize="small" />
-                        <span>Electric</span>
-                    </div>
-                </div>
-            </div>
+                </>
+            }
+
 
             {/* Price */}
             <div className="mt-4">
@@ -56,7 +61,7 @@ export default function CarCard({
 
             {/* Cart Button in Bottom Right */}
             <button className="absolute bottom-0 right-0 bg-blue-600 p-2 rounded-tl-2xl rounded-br-2xl w-12 h-12 flex items-center justify-center">
-                <ShoppingCart size={16} color="white" fontSize={20}/>
+                <ShoppingCart size={16} color="white" fontSize={20} />
             </button>
         </div>
     );

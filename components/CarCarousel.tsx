@@ -17,7 +17,6 @@ export default function CarCarousel({ className }: CarCarouselProps) {
             modules={[Navigation, Pagination]}
             spaceBetween={20} // Adjust space between slides as needed
             loop={true}
-            navigation
             pagination={{ clickable: true }}
             breakpoints={{
                 360: {
